@@ -16,11 +16,12 @@
  *******************************************************************************/
 
 #include "xbyak_aarch64_inner.h"
+#include <stdlib.h>
 
 static const size_t CSIZE = sizeof(uint32_t);
 
 inline void *AlignedMalloc(size_t size, size_t alignment) {
-#ifdef _MSC_VER
+#if defined(_WIN32)
   return _aligned_malloc(size, alignment);
 #else
   void *p;
@@ -30,7 +31,7 @@ inline void *AlignedMalloc(size_t size, size_t alignment) {
 }
 
 inline void AlignedFree(void *p) {
-#ifdef _MSC_VER
+#if defined(_WIN32)
   _aligned_free(p);
 #else
   free(p);
