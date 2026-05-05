@@ -258,7 +258,7 @@ public:
     default:
       return false;
     }
-#if defined(__GNUC__) || defined(__APPLE__)
+#if (defined(__GNUC__) && !defined(_WIN32)) || defined(__APPLE__)
     size_t pageSize = inner::getPageSize();
     size_t iaddr = reinterpret_cast<size_t>(addr);
     size_t roundAddr = iaddr & ~(pageSize - static_cast<size_t>(1));
